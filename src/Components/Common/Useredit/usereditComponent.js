@@ -1,4 +1,6 @@
-import React,{useState,useEffect} from "react";
+/** @jsx h */
+import {h,Fragment} from 'preact';
+import {useState,useEffect} from "preact/compat";
 import './useredit.scss'
 import UsereditForm from './usereditForm'
 import Usereditcard from './Usereditcard'
@@ -49,7 +51,7 @@ function Useredit(props){
       }
   })
   return(
-    <>
+    <Fragment>
       {
         (! props.profiledata)
         ?
@@ -103,7 +105,7 @@ function Useredit(props){
         :
         <div></div>
       }
-    </>
+    </Fragment>
   )
 }
 

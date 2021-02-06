@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx h */
+import {h} from 'preact';
 import {BrowserRouter} from 'react-router-dom';
 import Main from './Components/mainComponent'
 import {Provider} from 'react-redux';

@@ -1,7 +1,8 @@
-import React from "react";
+/** @jsx h */
+import {h,Fragment} from 'preact';
 export default function Usereditcard(props) {
   return(
-    <>
+    <Fragment>
     {
       // <div className="card-style glass four-box-shadow" inverse>
       <div className="card bg-danger card-style four-box-shadow">
@@ -52,6 +53,6 @@ export default function Usereditcard(props) {
         </div>
       </div>
      }
-    </>
+    </Fragment>
   )
 }

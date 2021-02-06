@@ -1,5 +1,5 @@
-import React from "react";
-// import React,{useState,useEffect} from "react";
+/** @jsx h */
+import {h} from 'preact';
 import { Control, Errors, LocalForm  } from "react-redux-form";
 // import * as country_city from '../../../shared/city-country.json'
 // import * as state_country from '../../../shared/state-country.json'

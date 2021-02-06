@@ -100,6 +100,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.12.13",
     "compression-webpack-plugin": "^7.1.2",
     "glob-all": "^3.2.1",
     "purgecss-webpack-plugin": "^4.0.0",

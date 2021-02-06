@@ -1,4 +1,6 @@
-import React,{useEffect,useState} from 'react';
+/** @jsx h */
+import {h,Fragment} from 'preact';
+import {useEffect,useState} from 'preact/compat';
 import './mycases.scss'
 import {fetchusercases,postacceptbyuser} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
@@ -151,7 +153,7 @@ function Mycases(props){
                 <div className={activeTab === '4'?"tab-pane active":"tab-pane"}>
                     {
                         (currentLawyer)?
-                        <>
+                        <Fragment>
                         <Head data={props.usercases.usercasedata.rejectedcases} title="Your Rejected Cases !"/>
                         <div style={{marginTop:50}} className="row justify-content-lg-around">
                             {
@@ -164,10 +166,10 @@ function Mycases(props){
                                 }) 
                             }
                         </div>
-                        </>:
-                        <>
+                        </Fragment>:
+                        <Fragment>
 
-                        </>
+                        </Fragment>
                     }
                 </div>
             </div>

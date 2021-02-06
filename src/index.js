@@ -1,10 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+/** @jsx h */
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(
-    <App />,
-  document.getElementById('root')
-);
+import {h, render } from 'preact';
+render( <App />, document.getElementById('root'));
 serviceWorker.register();
+

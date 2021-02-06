@@ -1,4 +1,6 @@
-import React,{useState} from 'react';
+/** @jsx h */
+import {h} from 'preact';
+import {useState} from 'preact/compat';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';

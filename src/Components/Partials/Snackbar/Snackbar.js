@@ -1,4 +1,6 @@
-import React,{useEffect} from 'react'
+/** @jsx h */
+import {h} from 'preact';
+import {useEffect} from 'preact/compat'
 import { Toast, ToastHeader } from 'reactstrap';
 import './snackbar.scss'
 import {clearMessage,successMessage,errorMessage} from '../../../shared/Actioncreators/actionCreators'

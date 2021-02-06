@@ -1,4 +1,6 @@
-import React, { Component,lazy, Suspense } from 'react';
+/** @jsx h */
+import {h,Component} from 'preact';
+import { lazy,Suspense} from 'preact/compat';
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from './Partials/Header/headerComponent';
@@ -97,7 +99,6 @@ class Main extends Component{
     // }
     render(){
         return(
-            <>
             <AuthProvider>
                 <LawyerAuthProvider>
                 <Header componentsPreload={componentsPreload}></Header>
@@ -185,7 +186,6 @@ class Main extends Component{
                 <Footer></Footer>
                 </LawyerAuthProvider>
             </AuthProvider>
-            </>
         );
     }
 }
