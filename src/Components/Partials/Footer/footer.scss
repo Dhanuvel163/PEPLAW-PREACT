@@ -1,0 +1,75 @@
+p {
+  margin-bottom: 2px !important;
+  opacity: 0.8;
+}
+p:hover,
+h6:hover {
+  opacity: 1;
+}
+h6 {
+  margin-bottom: 20px !important;
+  opacity: 0.8;
+}
+.map-embed {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.frame {
+  overflow: hidden;
+  height: inherit;
+  padding: 20px;
+}
+iframe {
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  border-radius: 10px !important;
+}
+.nf-map {
+  display: none;
+}
+.nf-contact {
+  display: none;
+}
+@media only screen and (max-width: 464px) {
+  .d-flex .footer-pages {
+    display: none !important;
+  }
+  .d-flex .f-contact {
+    display: none !important;
+  }
+  .nf-contact {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  .d-flex .f-map {
+    display: none !important;
+  }
+  .nf-map {
+    display: block;
+  }
+}
+.bi {
+  margin-right: 7px;
+}
+a:hover {
+  text-decoration: none !important;
+}
+@media only screen and (max-width: 600px) {
+  .header-footer {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 3px !important;
+    border-radius: 10px;
+  }
+  .footer a {
+    padding: 0px;
+  }
+  .footer {
+    padding: 7px;
+  }
+}

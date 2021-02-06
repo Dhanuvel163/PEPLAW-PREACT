@@ -1,0 +1,49 @@
+pre {
+  color: hsl(0, 0%, 100%);
+  font-size: inherit;
+  font-family: inherit;
+  text-overflow: unset;
+  overflow: hidden;
+}
+
+.profile span {
+  color: snow;
+  text-transform: uppercase;
+  font-weight: bolder;
+  text-overflow: ellipsis;
+}
+.profile .col-12 {
+  /* padding-left: 3px;
+  padding-right: 3px; */
+}
+
+.profile-img {
+  border-radius: 50%;
+}
+
+.Icon:hover {
+  opacity: 0.8;
+
+  transform: scaleZ(10x);
+}
+
+.edit-form {
+  animation: 0.8s fadein ease-in;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0.5;
+    transform: translateX(-70%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+.Usereditcard .box {
+  animation: fadein 0.7s;
+  -webkit-animation: fadein 0.7s;
+  -moz-animation: fadein 0.7s;
+  -o-animation: fadein 0.7s;
+}

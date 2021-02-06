@@ -1,0 +1,41 @@
+.success .toast,
+.success .toast-header {
+  background: linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61));
+  color: white;
+}
+.error .toast,
+.error .toast-header {
+  background: linear-gradient(to right, rgb(51, 51, 51), rgb(221, 24, 24));
+  color: white;
+}
+.toast-header {
+  padding: 11px !important;
+}
+.snack {
+  position: absolute;
+  z-index: 700;
+  top: 10;
+  /* width: 98.5%; */
+  width: 100%;
+}
+.close {
+  margin-left: 10px;
+}
+.close span {
+  color: azure;
+}
+.toast-anim {
+  animation: popup 0.5s ease-in-out;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(0.5);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

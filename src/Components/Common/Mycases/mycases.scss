@@ -1,0 +1,54 @@
+.mycases {
+  /* margin-top: 50px; */
+  max-height: 350px;
+  min-height: 350px;
+  overflow: auto;
+}
+
+// .mycases::-webkit-scrollbar {
+//   width: 8px;
+// }
+
+// .mycases::-webkit-scrollbar-track {
+//   -webkit-box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.3);
+//   border-radius: 10px;
+// }
+
+// .mycases::-webkit-scrollbar-thumb {
+//   background-color: blueviolet;
+//   width: 10px;
+//   border: 1px solid seashell;
+//   border-radius: 10px;
+// }
+
+.User-view {
+  z-index: 99999;
+  position: absolute;
+  width: fit-content;
+  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  animation: growDown 0.3s ease-in-out;
+  border: 2px solid gold;
+  box-shadow: inset 0 0 5px #000000;
+}
+
+.nav-tabs .nav-link {
+  color: white;
+  font-weight: bold !important;
+}
+
+.nav-tabs {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.card-body .active {
+  background-color: inherit !important;
+  color: white !important;
+}
+
+.nav-item > .active {
+  box-shadow: inset 0 0 5px #000000 !important;
+}
