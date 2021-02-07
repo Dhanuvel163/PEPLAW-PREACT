@@ -1,6 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
-import {useRef} from 'preact/compat';
+import React,{useRef} from 'react';
 import './cardprofile.scss'
 import {Link} from 'react-router-dom'
 import {useLawyerAuth} from '../../../Context/lawyerauth'

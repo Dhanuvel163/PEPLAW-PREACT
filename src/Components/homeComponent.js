@@ -1,6 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
-import {useState,memo,useEffect } from "preact/compat";
+import React, { useState,memo,useEffect } from "react";
 import {Link} from "react-router-dom";
 import {imageObserver} from '../Components/CustomHooks/useLazyloading'
 function Home(){
@@ -36,6 +34,7 @@ function Home(){
       ]
     )
     return (
+      <>
         <div className="container" style={{ marginTop: 60 }}>
                 {true && (document.title='HOME | PEPLAW')?null:null}
 
@@ -141,6 +140,7 @@ function Home(){
               <div style={{height:40}}></div>
 
         </div>
+      </>
     );
 
 }

@@ -1,5 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
+import React from 'react';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {postusercase} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';

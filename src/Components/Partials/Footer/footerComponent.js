@@ -1,6 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
-import {memo,useEffect} from 'preact/compat';
+import React,{memo,useEffect} from 'react';
 import './footer.scss'
 import {Link} from "react-router-dom";
 import {iframeObserver} from '../../CustomHooks/useLazyloading'

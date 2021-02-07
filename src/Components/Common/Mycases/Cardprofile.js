@@ -1,6 +1,4 @@
-/** @jsx h */
-import {h,Fragment} from 'preact';
-import {useRef,useState} from 'preact/compat';
+import React,{useRef,useState} from 'react';
 import {Link} from 'react-router-dom'
 import {debounce} from '../../../service/debounce'
 import {useLawyerAuth} from '../../../Context/lawyerauth'
@@ -21,7 +19,7 @@ export default function Cardprofile(props){
     }
     let profile =useRef(null)
     return(
-        <Fragment>
+        <>
         {
             (currentLawyer)
             ?
@@ -111,7 +109,7 @@ export default function Cardprofile(props){
             :
             null
         }
-        </Fragment>
+        </>
     )
 }
 
@@ -126,7 +124,7 @@ export default function Cardprofile(props){
 
 function DetailPart(props){
     return(
-        <Fragment>
+        <>
         <div className="card-text">
             <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
             {props.casedata.dispositioncode}
@@ -147,7 +145,7 @@ function DetailPart(props){
             <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
             {props.casedata.description}
         </div>
-        </Fragment>
+        </>
     )
 }
 
@@ -169,7 +167,7 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
         postacceptbyuser(id,lawyer.email,token,"USER")
     }
     return(
-        <Fragment>
+        <>
             <div style={{marginTop:20}}>
                 <Link to={`/profile/${lawyer._id}`} style={{color:'white'}}>
                 {lawyer.name.substring(0,10)}                
@@ -207,6 +205,6 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
                 {lawyer.mobile}
                 </p> */}
             </div>
-        </Fragment>
+        </>
     )
 }

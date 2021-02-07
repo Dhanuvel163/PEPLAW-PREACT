@@ -1,6 +1,4 @@
-/** @jsx h */
-import {h,Fragment} from 'preact';
-import {useEffect,useCallback} from 'preact/compat'
+import React,{useEffect,useCallback} from 'react'
 import {fetchdetailpagedata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import { useParams} from 'react-router-dom'
@@ -41,7 +39,7 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
         }
     },[fetchDetail])
     return (
-        <Fragment>
+        <>
             {
                 (!detailpage)
                 ?
@@ -118,7 +116,7 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
             :<div></div>
             }
 
-        </Fragment>
+        </>
     )
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Userdetail);

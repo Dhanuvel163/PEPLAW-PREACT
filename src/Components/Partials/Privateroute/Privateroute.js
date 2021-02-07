@@ -1,5 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
+import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { useAuth } from "../../../Context/Auth"
 

@@ -1,5 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
+import React from 'react'
 
 export default function Formerror({props}) {
     return (

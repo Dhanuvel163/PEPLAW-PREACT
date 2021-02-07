@@ -1,5 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
+import React from 'react';
 import {Control,Errors,LocalForm} from 'react-redux-form';
 import {Link,useHistory
 } from "react-router-dom";

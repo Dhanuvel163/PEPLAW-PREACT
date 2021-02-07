@@ -1,6 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
-import {useEffect} from 'preact/compat';
+import React,{useEffect} from 'react';
 import Cardprofile from './cardprofile'
 import {connect} from 'react-redux';
 import {fetchallcases,postapply

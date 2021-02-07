@@ -48,6 +48,7 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "preact": "^10.5.12",
+    "preact-render-to-string": "^5.1.12",
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.1",
     "react-helmet": "^6.1.0",

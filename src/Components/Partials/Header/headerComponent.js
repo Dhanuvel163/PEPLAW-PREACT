@@ -1,6 +1,4 @@
-/** @jsx h */
-import {h} from 'preact';
-import {useEffect,useState} from 'preact/compat';
+import React,{useEffect,useState} from 'react';
 import {Collapse,UncontrolledDropdown,DropdownToggle,DropdownMenu} from 'reactstrap';
 import {Link} from "react-router-dom";
 import {debounce} from '../../../service/debounce'
