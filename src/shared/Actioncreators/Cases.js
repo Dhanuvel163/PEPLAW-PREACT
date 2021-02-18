@@ -44,7 +44,6 @@ export const postusercase=(dcode,ddate,stime,acharge,desc,token)=>(dispatch)=>{
 
 export const fetchusercases=(token,type)=>async(dispatch)=>{
     dispatch(usercasesloading(true));
-    console.log(token,type)
     if(type==="USER"){
         try{
             const [cases,acceptedcases,pendingcases] = await Promise.all ([
@@ -167,7 +166,6 @@ export const postapply=(id,token)=>(dispatch)=>{
             if(Response.success){
                 displaySuccess(dispatch,'Applied successfully!!')
                 dispatch(filterallcases(id));
-                console.log(Response.case)
                 dispatch(addtousercases(Response.case))
             }
         })

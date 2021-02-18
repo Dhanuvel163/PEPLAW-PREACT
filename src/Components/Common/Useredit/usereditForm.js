@@ -1,6 +1,6 @@
 import React from "react";
 import Formerror from '../../Partials/Formerror/Formerror';
-import { Formik } from 'formik';
+import { Formik , FieldArray} from 'formik';
 
 import {useLawyerAuth} from '../../../Context/lawyerauth'
 import {useAuth} from '../../../Context/userauth'
@@ -23,8 +23,7 @@ function UsereditForm(props){
     }
     return(
           <div className="container" style={{ marginTop: 50 }}>
-            <hr></hr>
-            <h4 className="text-center"> 
+            <h4 className="text-center mb-5"> 
               <svg style={{marginRight:6}}
               xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-pen" viewBox="0 0 16 16">
                 <path d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
@@ -41,7 +40,14 @@ function UsereditForm(props){
                 city:props.profiledata.profiledata.city,
                 address:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.addr1 : '',
                 pincode:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.postalCode : '',
-                state:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.state : ''
+                state:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.state : '',
+                experience:'',
+                j_practice_location:'',
+                biography:'',
+                practice_areas:[''],
+                languages:[''],
+                education:[''],
+                p_associations:['']
               }
             }
             validate={values => {
@@ -53,7 +59,7 @@ function UsereditForm(props){
                 }
                 if (!values.mobile) {
                 errors.mobile = 'Phone Number is Required';
-                } else if (values.mobile.length !== 20) {
+                } else if (values.mobile.length !== 10) {
                 errors.mobile = 'Phone Number should has 10 characters';
                 } 
                 if (values.pincode && values.pincode.length !== 6) {
@@ -67,13 +73,17 @@ function UsereditForm(props){
             }}
             >
             {({values,errors,touched,handleChange,handleBlur,handleSubmit,isSubmitting}) => (
-            <div className="row" style={{ marginTop: 50, marginBottom: 20 }}>
-              <div className="col-12 col-sm-6">
-                    <form onSubmit={handleSubmit}>                               
+
+              <form onSubmit={handleSubmit}>
+                <h5>Personal Details</h5>
+                <hr></hr>
+
+                <div className="row mt-1" style={{ marginTop: 50, marginBottom: 20 }}>
+                  <div className="col-12 col-sm-6">
                     <div className="form-group">
                             <label htmlFor="username">Username</label>
                             <input
-                                type="username"
+                                type="text"
                                 name="username"
                                 className="form-control"
                                 onChange={handleChange}
@@ -87,7 +97,7 @@ function UsereditForm(props){
                           <div className="form-group">
                                   <label htmlFor="mobile">Phone Number</label>
                                   <input
-                                      type="mobile"
+                                      type="text"
                                       name="mobile"
                                       className="form-control"
                                       onChange={handleChange}
@@ -101,7 +111,7 @@ function UsereditForm(props){
                           <div className="form-group">
                                   <label htmlFor="country">Country</label>
                                   <input
-                                      type="country"
+                                      type="text"
                                       name="country"
                                       className="form-control"
                                       onChange={handleChange}
@@ -115,7 +125,7 @@ function UsereditForm(props){
                     <div className="form-group">
                         <label htmlFor="address">Address</label>
                         <input
-                            type="address"
+                            type="text"
                             name="address"
                             className="form-control"
                             onChange={handleChange}
@@ -129,7 +139,7 @@ function UsereditForm(props){
                           <div className="form-group">
                               <label htmlFor="city">City</label>
                               <input
-                                  type="city"
+                                  type="text"
                                   name="city"
                                   className="form-control"
                                   onChange={handleChange}
@@ -143,7 +153,7 @@ function UsereditForm(props){
                           <div className="form-group">
                               <label htmlFor="state">State</label>
                               <input
-                                  type="state"
+                                  type="text"
                                   name="state"
                                   className="form-control"
                                   onChange={handleChange}
@@ -157,7 +167,7 @@ function UsereditForm(props){
                     <div className="form-group">
                             <label htmlFor="pincode">Pincode</label>
                             <input
-                                type="pincode"
+                                type="text"
                                 name="pincode"
                                 className="form-control"
                                 onChange={handleChange}
@@ -166,40 +176,236 @@ function UsereditForm(props){
                             />
                     </div>
                     {errors.pincode && touched.pincode && <Formerror>{errors.pincode}</Formerror>}
-                    </form>
-              </div>
-              <div className="col container d-none d-md-flex justify-content-center align-items-center p-5">
-                  <img alt="EDIT" style={{width:'inherit',height:'inherit'}}
-                  src="/assets/edit.svg"/>
-              </div>
-            </div>
+                  </div>
+                  <div className="col container d-none d-md-flex justify-content-center align-items-center p-5">
+                      <img alt="EDIT" style={{width:'inherit',height:'inherit'}}
+                      src="/assets/edit.svg"/>
+                  </div>
+
+                </div>
+
+                  <div>
+                    {
+                      currentLawyer &&
+                      <>
+                      <h5>Lawyer Details</h5>
+                      <hr></hr>                    
+                      <div className="row">
+                          <div className="col-12 col-sm-6">
+                            <FieldArray
+                              name="practice_areas"
+                              render={arrayHelpers => (
+                                <div>
+                                <label htmlFor="practice_areas">Practice Areas</label>
+                                  {(
+                                    values.practice_areas.map((friend, index) => (
+                                      <div key={index}>
+                                        <input name={`practice_areas.${index}`} className="form-control mt-2" placeholder="Ex : Divorce etc."
+                                        onChange={handleChange} onBlur={handleBlur} value={values.practice_areas[index]}
+                                        />
+                                      </div>
+                                    ))
+                                  )}
+                                  <div className="d-flex justify-content-around align-content-center mb-2 mt-2">
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm btn-secondary d-flex justify-content-center align-content-center" 
+                                      onClick={() => arrayHelpers.insert(values.practice_areas.length, '')}>
+                                        <div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                            <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm btn-secondary d-flex justify-content-around align-content-center" 
+                                      onClick={() => values.practice_areas.length===1?null:arrayHelpers.remove(values.practice_areas.length-1)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-minus-fill" viewBox="0 0 16 16">
+                                          <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM6 7.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1z"/>
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            />
+                          </div>
+                          <div className="col-12 col-sm-6">
+                            <FieldArray
+                              name="languages"
+                              render={arrayHelpers => (
+                                <div>
+                                <label htmlFor="languages">Languages</label>
+                                  {(
+                                    values.languages.map((friend, index) => (
+                                      <div key={index}>
+                                        <input name={`languages.${index}`} className="form-control mt-2" placeholder="Ex : English"
+                                        onChange={handleChange} onBlur={handleBlur} value={values.languages[index]}
+                                        />
+                                      </div>
+                                    ))
+                                  )}
+                                  <div className="d-flex justify-content-around align-content-center mb-2 mt-2">
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm  btn-secondary d-flex justify-content-center align-content-center" 
+                                      onClick={() => arrayHelpers.insert(values.languages.length, '')}>
+                                        <div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                            <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm btn-secondary d-flex justify-content-around align-content-center" 
+                                      onClick={() => values.languages.length===1?null:arrayHelpers.remove(values.languages.length-1)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-minus-fill" viewBox="0 0 16 16">
+                                          <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM6 7.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1z"/>
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            />
+                          </div>
+                      </div>
+                      <div className="row">
+                          <div className="col-12 col-sm-6">
+                            <div className="form-group">
+                                    <label htmlFor="experience">Experience (In Years)</label>
+                                    <input
+                                        type="text"
+                                        name="experience"
+                                        className="form-control"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.experience}
+                                    />
+                            </div>
+                            {errors.experience && touched.experience && <Formerror>{errors.experience}</Formerror>}
+                          </div>
+                          <div className="col-12 col-sm-6">
+                            <div className="form-group">
+                                    <label htmlFor="j_practice_location">Jurisdictions Admitted to Practice</label>
+                                    <input
+                                        type="text"
+                                        name="j_practice_location"
+                                        className="form-control"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.j_practice_location}
+                                    />
+                            </div>
+                            {errors.j_practice_location && touched.j_practice_location && <Formerror>{errors.j_practice_location}</Formerror>}
+                          </div>
+                      </div>
+                      <div className="form-group">
+                              <label htmlFor="biography">Biography</label>
+                              <textarea
+                                  type="text"
+                                  name="biography"
+                                  className="form-control"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.biography}
+                              />
+                      </div>
+                      {errors.biography && touched.biography && <Formerror>{errors.biography}</Formerror>}  
+
+                      <div className="row">
+                          <div className="col-12 col-sm-6">
+                            <FieldArray
+                              name="education"
+                              render={arrayHelpers => (
+                                <div>
+                                <label htmlFor="education">Education</label>
+                                  {(
+                                    values.education.map((friend, index) => (
+                                      <div key={index}>
+                                        <input name={`education.${index}`} className="form-control mt-2" placeholder="Ex : Madras University - B.Tech - IT"
+                                        onChange={handleChange} onBlur={handleBlur} value={values.education[index]}
+                                        />
+                                      </div>
+                                    ))
+                                  )}
+                                  <div className="d-flex justify-content-around align-content-center mb-2 mt-2">
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm btn-secondary d-flex justify-content-center align-content-center" 
+                                      onClick={() => arrayHelpers.insert(values.education.length, '')}>
+                                        <div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                            <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm btn-secondary d-flex justify-content-around align-content-center" 
+                                      onClick={() => values.education.length===1?null:arrayHelpers.remove(values.education.length-1)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-minus-fill" viewBox="0 0 16 16">
+                                          <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM6 7.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1z"/>
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            />
+                          </div>
+                          <div className="col-12 col-sm-6">
+                            <FieldArray
+                              name="p_associations"
+                              render={arrayHelpers => (
+                                <div>
+                                <label htmlFor="p_associations">Professional Associations</label>
+                                  {(
+                                    values.p_associations.map((friend, index) => (
+                                      <div key={index}>
+                                        <input name={`p_associations.${index}`} className="form-control mt-2" placeholder="Ex : American Bar Association"
+                                        onChange={handleChange} onBlur={handleBlur} value={values.p_associations[index]}
+                                        />
+                                      </div>
+                                    ))
+                                  )}
+                                  <div className="d-flex justify-content-around align-content-center mb-2 mt-2">
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm  btn-secondary d-flex justify-content-center align-content-center" 
+                                      onClick={() => arrayHelpers.insert(values.p_associations.length, '')}>
+                                        <div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                            <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div style={{borderRadius:'50%'}} className="btn-sm btn-secondary d-flex justify-content-around align-content-center" 
+                                      onClick={() => values.p_associations.length===1?null:arrayHelpers.remove(values.p_associations.length-1)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" style={{margin:0}} width="27" height="25.2" fill="currentColor" className="bi bi-patch-minus-fill" viewBox="0 0 16 16">
+                                          <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM6 7.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1z"/>
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            />
+                          </div>
+                      </div>
+
+                      </>
+                    }
+                        <div  className="d-flex justify-content-center">
+                          <button className="btn btn-secondary" type="submit" >
+                            Edit
+                          </button>
+                        </div>
+                  </div>
+
+              </form>
             )}
             </Formik>
-
-
-            <hr></hr>
-            {/* <div>
-                  <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <Control.text model=".username" className="form-control" name="username" id="username" placeholder="Username"
-                      validators={{required, minLength: minLength(6), maxLength: maxLength(20),}}
-                    />
-                    <Errors
-                      model=".username" show="touched" component={(props)=><Formerror props={props}/>}
-                      messages={{
-                        required: "\nusername is required !!", minLength: "\nusername should has minimum 6 characters !!",
-                        maxLength: "\nusername should has maximum 20 characters only !!",
-                      }}
-                    ></Errors>
-                  </div>
-
-                  <div  className="d-flex justify-content-center">
-                    <button className="btn btn-secondary" type="submit" >
-                      Edit
-                    </button>
-                  </div>
-
-            </div> */}
           </div>
     )
 }
