@@ -2,7 +2,6 @@ import React, { useState,memo,useEffect } from "react";
 import {Link} from "react-router-dom";
 import {imageObserver} from '../Components/CustomHooks/useLazyloading'
 function Home(){
-
     useEffect(() => {
       const arr = document.querySelectorAll('.lzy_img')
       arr.forEach((v) => {

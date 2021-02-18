@@ -152,9 +152,6 @@ function DetailPart(props){
 function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
     const toggleIn = (e) => {
         e.persist()
-        // var x = e.clientX+"px",y = e.clientY+"px";
-        // profile.current.style.top = y;
-        // profile.current.style.left = x;
         profile.current.style.display = 'block'
     }
     const toggleOut = () => {

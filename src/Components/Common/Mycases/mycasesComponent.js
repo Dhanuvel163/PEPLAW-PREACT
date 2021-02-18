@@ -168,7 +168,6 @@ function Mycases(props){
                         </div>
                         </Fragment>:
                         <Fragment>
-
                         </Fragment>
                     }
                 </div>

@@ -1,11 +1,10 @@
-import React,{useState} from 'react';
-import {Control,LocalForm,Errors} from 'react-redux-form';
+import React from 'react';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 import {successMessage,errorMessage,clearMessage,load,clearLoading,createlawyer,
     fetchprofiledata,fetchusercases,fetchallcases} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
-// import {Helmet} from 'react-helmet'
+import { Formik } from 'formik';
 import '../../User/Login/googlebtn.scss'
 import '../../User/Login/userlogin.scss'
 import { useLawyerAuth } from "../../../Context/lawyerauth"
@@ -25,11 +24,8 @@ const mapDispatchToProps=dispatch=>({
     fetchusercases:(token,type)=>dispatch(fetchusercases(token,type)),
     fetchallcases:(token)=>dispatch(fetchallcases(token)),
 })
-const required=(val)=>(val)&&(val.length)
-const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 function Lawyerlogin(props){
     let history = useHistory()
-    let [email,setemail] = useState(null)
     const { login,signInWithGoogle,signInWithFacebook,resetPassword } = useLawyerAuth()
     const handlesubmit=async(values)=>{
         props.load()
@@ -46,9 +42,6 @@ function Lawyerlogin(props){
             setTimeout(()=>{props.clearMessage()},4000)
             props.clearLoading()
         }
-    }
-    const handlechange=async(values)=>{
-        setemail(values.email)
     }
     const signInGoogle = async()=>{
         props.load()
@@ -74,7 +67,6 @@ function Lawyerlogin(props){
         props.load()
         try{
             const data = await signInWithFacebook()
-            console.log(data)
             const token = await data.user.getIdToken()
             props.createlawyer(
                 data.user.displayName,data.user.email,null,data.user.phoneNumber,
@@ -91,7 +83,7 @@ function Lawyerlogin(props){
             setTimeout(()=>{props.clearMessage()},2000)
         }
     }
-    const resetPass=async()=>{
+    const resetPass=async(email)=>{
         if(!email){
             props.errorMessage('Please enter the email to send reset link to mail')
             setTimeout(()=>{props.clearMessage()},4000)
@@ -110,10 +102,6 @@ function Lawyerlogin(props){
     }
         return(
             <div className="login">
-                {/* <Helmet>
-                    <title>LAWYER LOGIN | PEPAW</title>
-                    <meta name="description" content="lawyer login page"/>
-                </Helmet> */}
                 {true && (document.title='LAWYER LOGIN | PEPLAW')?null:null}
                 <h5 className="text-center">
                     <svg style={{marginRight:10}} width="22" height="22" fill="currentColor" className="bi bi-person" viewBox="0 0 16 16">
@@ -124,62 +112,80 @@ function Lawyerlogin(props){
                 <hr></hr>
                         <div className="d-flex justify-content-center align-items-center">
                             <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
-                                <div>
-                                    <LocalForm onSubmit={(values)=>handlesubmit(values)} onChange={(values) => handlechange(values)}>
-                                    <div className="form-group">
-                                            <label htmlFor="exampleEmail">Email</label>
-                                            <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
-                                            placeholder="Email"
-                                            validators={{required,isemail}}/>
-                                            <Errors
-                                            model='.email'
-                                            show="touched"
-                                            component={(props)=><Formerror props={props}/>}
-                                            messages={{
-                                                required:'\nEmail is required !!',
-                                                isemail:'\nEnter a valid email !!'
-                                            }}
-                                            ></Errors>
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="examplePassword">Password</label>
-                                            <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
-                                            placeholder="password"
-                                            validators={{required}}/>
-                                            <Errors
-                                            model='.password'
-                                            show="touched"
-                                            component={(props)=><Formerror props={props}/>}
-                                            messages={{
-                                                required:'password is required !!',
-                                            }}
-                                            ></Errors>
-                                        </div>
-                                        <div className="d-flex justify-content-between">
-                                            <div>
-                                                <Link to="/user/login" className="nav-link">
-                                                    <p style={{color:'white'}}>
-                                                        <b className="foot-link">
-                                                        Are you a user ?
-                                                        </b>
-                                                    </p>
-                                                </Link>
-                                            </div>
-                                            <div>
-                                                <div onClick={resetPass} className="nav-link text-right">
-                                                    <p style={{color:'white'}}>
-                                                        <b className="foot-link">
-                                                        Forgot password ?
-                                                        </b>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="d-flex justify-content-center mt-2">
-                                        <button className="btn btn-secondary">Sign in</button>
-                                        </div>
-                                    </LocalForm> 
 
+                            <Formik
+                            initialValues={{ email: '', password: '' }}
+                            validate={values => {
+                                const errors = {};
+                                if (!values.email) {
+                                errors.email = 'Email is Required';
+                                } else if (
+                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                                ) {
+                                errors.email = 'Invalid email address';
+                                }
+                                return errors;
+                            }}
+                            onSubmit={(values, { setSubmitting }) => {
+                                handlesubmit(values)
+                                setSubmitting(false);
+                            }}
+                            >
+                            {({values,errors,touched,handleChange,handleBlur,handleSubmit,isSubmitting}) => (
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                            <label htmlFor="email">Email</label>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                className="form-control"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.email}
+                                            />
+                                    </div>
+                                    {errors.email && touched.email && <Formerror>{errors.email}</Formerror>}
+                                    <div className="form-group">
+                                            <label htmlFor="password">Password</label>
+                                            <input
+                                                type="password"
+                                                name="password"
+                                                className="form-control"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.password}
+                                            />
+                                    </div>
+                                    {errors.password && touched.password && <Formerror>{errors.password}</Formerror>}
+
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            <Link to="/user/login" className="nav-link">
+                                                <p style={{color:'white'}}>
+                                                    <b className="foot-link">
+                                                    Are you a user ?
+                                                    </b>
+                                                </p>
+                                            </Link>
+                                        </div>
+                                        <div>
+                                            <div onClick={()=>resetPass(values.email)} className="nav-link text-right">
+                                                <p style={{color:'white'}}>
+                                                    <b className="foot-link">
+                                                    Forgot password ?
+                                                    </b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex justify-content-center mt-2">
+                                    <button type="submit" className="btn btn-secondary">Sign in</button>
+                                    </div>
+                                </form>
+                            )}
+                            </Formik>
+
+                                <div>
                                     <hr className="bg-light"/>
                                     <div className="container d-flex justify-content-center align-items-center">
                                         <div className="google-btn" onClick={signInGoogle}>
@@ -212,6 +218,7 @@ function Lawyerlogin(props){
                                         </Link>
                                     </div>       
                                 </div>
+
                             </div>
                         </div>
                     <hr></hr>

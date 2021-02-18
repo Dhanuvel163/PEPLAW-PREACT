@@ -2,7 +2,6 @@ import React,{useEffect,useCallback} from 'react'
 import {fetchdetailpagedata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import { useParams} from 'react-router-dom'
-// import {Helmet} from 'react-helmet'
 import '../Useredit/useredit.scss'
 import {useLawyerAuth} from '../../../Context/lawyerauth'
 import {useAuth} from '../../../Context/userauth'
@@ -56,8 +55,6 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                detailpage.isloading
                 ?
                 <div style={{height:'90vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
-                        {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
-                        </div> */}
                         <div  style={{minWidth:'300px'}}> 
                         <div className="lzy_img__image loading"></div> 
                         <div className="lzy_img__title loading"></div> 
@@ -69,10 +66,6 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                 ?
                 <div className="container" style={{marginTop:100}}>
                     <div className="card bg-danger card-style four-box-shadow">
-                        {/* <Helmet>
-                            <title>{detailpage.detailpage.name.toUpperCase()} | PEPLAW </title>
-                        <meta name="description" content="Peplaw profile detail page"/>
-                        </Helmet> */}
                         {true && (document.title=`${detailpage.detailpage.name.toUpperCase()} | PEPLAW`)?null:null}
                         <div className="card-header">
                             <div className="mb-3">

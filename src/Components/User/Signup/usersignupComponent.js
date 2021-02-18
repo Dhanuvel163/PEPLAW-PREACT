@@ -1,12 +1,11 @@
 import React from 'react';
-import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 import {successMessage,errorMessage,clearMessage,load,clearLoading,createuser} from '../../../shared/Actioncreators/actionCreators';
 import Formerror from '../../Partials/Formerror/Formerror';
 import { useAuth } from "../../../Context/userauth"
+import { Formik } from 'formik';
 
-// import {Helmet} from 'react-helmet'
 const mapStateToProps=state=>{
     return {
     }
@@ -19,17 +18,12 @@ const mapDispatchToProps=dispatch=>({
     clearLoading:()=>dispatch(clearLoading()),
     createuser:(name,email,password,mobile,picture,token,history)=>dispatch(createuser(name,email,password,mobile,picture,token,history)),
 })
-const required=(val)=>(val)&&(val.length)
-const minLength=(len)=>(val)=>(val)&&(val.length>=len)
-const maxLength=(len)=>(val)=>(val)&&(val.length<=len)
-// const isNumber=(val)=>!isNaN(Number(val))
-const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 
 function Usersignup(props){
     let history = useHistory()
     const { signup } = useAuth()
     const handlesubmit=async(values)=>{
-        if(values.password !== values.cpass){
+        if(values.password !== values.cpassword){
             props.errorMessage('Passwords not matching !')
             setTimeout(()=>{props.clearMessage()},2000)
             return
@@ -54,10 +48,6 @@ function Usersignup(props){
     }
         return(
             <div>
-                {/* <Helmet>
-                    <title>USER SIGNUP | PEPLAW</title>
-                    <meta name="description" content="user signup page" />
-                </Helmet> */}
                 {true && (document.title='USER SIGNUP | PEPLAW')?null:null}
                 <h5 className="text-center">
                         <svg style={{marginRight:10}}
@@ -71,114 +61,108 @@ function Usersignup(props){
                 <hr></hr>
                 <div className="d-flex justify-content-center align-items-center">
                     <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
-                        <div>
-                        <LocalForm onSubmit={(values)=>handlesubmit(values)}>
-                            <div className='form-group'>
-                                <label htmlFor="username">Username</label>
-                                <Control.text model=".username" className='form-control' name="username" id="username"
-                                    placeholder="Username"
-                                    validators={{
-                                    required,minLength:minLength(6),maxLength:maxLength(20)
-                                    }}/>
-                                <Errors
-                                    model='.username'
-                                    show="touched"
-                                    component={(props)=><Formerror props={props}/>}
-                                    messages={{
-                                        required:'\nusername is required !!',
-                                        minLength:'\nusername should has minimum 6 characters !!',
-                                        maxLength:'\nusername should has maximum 20 characters only !!'
-                                    }}
-                                    ></Errors>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleEmail">Email</label>
-                                <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
-                                    placeholder="Email"
-                                    validators={{
-                                    required,isemail
-                                    }}/>
-                                    <Errors
-                                    model='.email'
-                                    show="touched"
-                                    component={(props)=><Formerror props={props}/>}
-                                    messages={{
-                                        required:'\nEmail is required !!',
-                                        isemail:'\nEnter a valid email !!'
-                                    }}
-                                    ></Errors>
-                            </div>
-                            <div className="row">
-                                <div className="col-12 col-sm-6">
-                                    <div className="form-group">
-                                        <label htmlFor="examplePassword">Password</label>
-                                        <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
-                                        placeholder="password"
-                                        validators={{
-                                            required,minLength:minLength(6),maxLength:maxLength(20)
-                                        }}/>
-                                        <Errors
-                                        model='.password'
-                                        show="touched"
-                                        component={(props)=><Formerror props={props}/>}
-                                        messages={{
-                                            required:'\npassword is required !!',
-                                            minLength:'\npassword should has minimum 6 characters !!',
-                                            maxLength:'\npassword should has maximum 20 characters only !!'
-                                        }}
-                                        ></Errors>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-sm-6">
-                                    <div className="form-group">
-                                        <label htmlFor="cpass">Confirm Password</label>
-                                        <Control.password model=".cpass" className='form-control' name="cpass" id="cpass"
-                                        placeholder="Confirm password"
-                                        validators={{
-                                            required
-                                        }}/>
-                                        <Errors
-                                        model='.cpass'
-                                        show="touched"
-                                        component={(props)=><Formerror props={props}/>}
-                                        messages={{
-                                            required:'\nConfirm password is required !!'
-                                        }}
-                                        ></Errors>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* <div className="form-group">
-                                <label htmlFor="mobile">Phone Number</label>
-                                <Control.text model=".mobile" className='form-control' name="mobile" id="mobile"
-                                    placeholder="mobile"
-                                    validators={{
-                                    required,minLength:minLength(10),maxLength:maxLength(10),isNumber
-                                    }}/>
-                                    <Errors
-                                    model='.mobile'
-                                    show="touched"
-                                    component={(props)=><Formerror props={props}/>}
-                                    messages={{
-                                        required:'\nmobile is required !!',
-                                        minLength:'\nmobile should has minimum 6 characters !!',
-                                        maxLength:'\nmobile should has maximum 20 characters only !!',
-                                        isNumber:'\nEnter a valid phone Number !!'
-                                    }}
-                                    ></Errors>
-                            </div> */}
-                                <Link to="/lawyer/signup" className="nav-link">
-                                    <p style={{color:'white'}}>
-                                        <b>
-                                        Are you a lawyer ?
-                                        </b>
-                                    </p>
-                                </Link>
-                            <div className="d-flex justify-content-center mt-2">
-                            <button className="btn btn-secondary">Sign Up</button>
-                            </div>
-                        </LocalForm>
-                        </div>
+
+                                <Formik
+                                initialValues={{ email: '', password: '',username:'',cpassword:'' }}
+                                validate={values => {
+                                    const errors = {};
+                                    if (!values.email) {
+                                    errors.email = 'Email is Required';
+                                    } else if (
+                                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                                    ) {
+                                    errors.email = 'Invalid email address';
+                                    }
+
+                                    if (!values.username) {
+                                    errors.username = 'Username is Required';
+                                    } else if (values.username.length<6 || values.username.length>20) {
+                                    errors.username = 'Username should has minimum 6 characters and maximum 20 characters';
+                                    }                                    
+                                    if (!values.password) {
+                                    errors.password = 'Password is Required';
+                                    } else if (values.password.length<6 || values.password.length>20) {
+                                    errors.password = 'Password should has minimum 6 characters and maximum 20 characters';
+                                    }   
+
+                                    return errors;
+                                }}
+                                onSubmit={(values, { setSubmitting }) => {
+                                    handlesubmit(values)
+                                    setSubmitting(false);
+                                }}
+                                >
+                                {({values,errors,touched,handleChange,handleBlur,handleSubmit,isSubmitting}) => (
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="form-group">
+                                                <label htmlFor="username">Username</label>
+                                                <input
+                                                    type="username"
+                                                    name="username"
+                                                    className="form-control"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.username}
+                                                />
+                                        </div>
+                                        {errors.username && touched.username && <Formerror>{errors.username}</Formerror>}
+                                        <div className="form-group">
+                                                <label htmlFor="email">Email</label>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    className="form-control"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.email}
+                                                />
+                                        </div>
+                                        {errors.email && touched.email && <Formerror>{errors.email}</Formerror>}
+                                        <div className="row">
+                                            <div className="col-12 col-sm-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="password">Password</label>
+                                                    <input
+                                                        type="password"
+                                                        name="password"
+                                                        className="form-control"
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.password}
+                                                    />
+                                                </div>
+                                                {errors.password && touched.password && <Formerror>{errors.password}</Formerror>}
+                                            </div>
+                                            <div className="col-12 col-sm-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="cpassword">Confirm Password</label>
+                                                    <input
+                                                        type="cpassword"
+                                                        name="cpassword"
+                                                        className="form-control"
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.cpassword}
+                                                    />
+                                                </div>
+                                                {errors.cpassword && touched.cpassword && <Formerror>{errors.cpassword}</Formerror>}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Link to="/lawyer/signup" className="nav-link">
+                                                <p style={{color:'white'}}>
+                                                    <b>
+                                                    Are you a lawyer ?
+                                                    </b>
+                                                </p>
+                                            </Link>
+                                            <div className="d-flex justify-content-center mt-2">
+                                            <button type="submit" className="btn btn-secondary">Sign Up</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                )}
+                                </Formik>
                     </div>        
                 </div>
                 <hr></hr>

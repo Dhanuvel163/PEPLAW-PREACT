@@ -1,13 +1,10 @@
 import React from 'react';
-import {Control,Errors,LocalForm} from 'react-redux-form';
-import {Link,useHistory
-} from "react-router-dom";
+import { Formik } from 'formik';
+import {Link,useHistory} from "react-router-dom";
 import {successMessage,errorMessage,clearMessage,load,clearLoading,createlawyer} from '../../../shared/Actioncreators/actionCreators';
 import {connect} from 'react-redux';
-// import {actions} from 'react-redux-form';
 import Formerror from '../../Partials/Formerror/Formerror';
 import { useLawyerAuth } from "../../../Context/lawyerauth"
-// import {Helmet} from 'react-helmet'
 
 const mapStateToProps=state=>{
     return {
@@ -19,15 +16,8 @@ const mapDispatchToProps=dispatch=>({
     clearMessage:()=>dispatch(clearMessage()),
     load:()=>dispatch(load()),
     clearLoading:()=>dispatch(clearLoading()),
-    // lawyersignupformreset:()=>dispatch(actions.reset('lawyersignupform')),
     createlawyer:(name,email,password,mobile,picture,token,history)=>dispatch(createlawyer(name,email,password,mobile,picture,token,history)),
 })
-const required=(val)=>(val)&&(val.length)
-const minLength=(len)=>(val)=>(val)&&(val.length>=len)
-const maxLength=(len)=>(val)=>(val)&&(val.length<=len)
-// const isNumber=(val)=>!isNaN(Number(val))
-const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
-
 function Lawyersignup(props){
     let history = useHistory()
     const { signup } = useLawyerAuth()
@@ -57,10 +47,6 @@ function Lawyersignup(props){
     }
     return(
             <div>
-                {/* <Helmet>
-                    <title>LAWYER SIGNUP | PEPLAW</title>
-                    <meta name="description" content="lawyer signup page"/>
-                </Helmet> */}
                 {true && (document.title='LAWYER SIGNUP | PEPLAW')?null:null}
                 <h5 className="text-center">
                         <svg style={{marginRight:10}}
@@ -73,92 +59,110 @@ function Lawyersignup(props){
                 <hr></hr>
                 <div className="d-flex justify-content-center align-items-center">
                     <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
-                        <div>
-                        <LocalForm  onSubmit={(values)=>handlesubmit(values)}>
-                                <div className='form-group'>
-                                    <label htmlFor="username">Username</label>
-                                    <Control.text model=".username" className='form-control' name="username" id="username"
-                                     placeholder="Username"
-                                     validators={{required,minLength:minLength(6),maxLength:maxLength(20)}}/>
-                                    <Errors
-                                     model='.username'
-                                     show="touched"
-                                     component={(props)=><Formerror props={props}/>}
-                                     messages={{
-                                         required:'\nusername is required !!',
-                                         minLength:'\nusername should has minimum 6 characters !!',
-                                         maxLength:'\nusername should has maximum 20 characters only !!'
-                                     }}
-                                     ></Errors>
-                                </div>
+                        <Formik
+                        initialValues={{ email: '', password: '',username:'',cpassword:'' }}
+                        validate={values => {
+                            const errors = {};
+                            if (!values.email) {
+                            errors.email = 'Email is Required';
+                            } else if (
+                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                            ) {
+                            errors.email = 'Invalid email address';
+                            }
+
+                            if (!values.username) {
+                            errors.username = 'Username is Required';
+                            } else if (values.username.length<6 || values.username.length>20) {
+                            errors.username = 'Username should has minimum 6 characters and maximum 20 characters';
+                            }                                    
+                            if (!values.password) {
+                            errors.password = 'Password is Required';
+                            } else if (values.password.length<6 || values.password.length>20) {
+                            errors.password = 'Password should has minimum 6 characters and maximum 20 characters';
+                            }   
+
+                            return errors;
+                        }}
+                        onSubmit={(values, { setSubmitting }) => {
+                            handlesubmit(values)
+                            setSubmitting(false);
+                        }}
+                        >
+                        {({values,errors,touched,handleChange,handleBlur,handleSubmit,isSubmitting}) => (
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label htmlFor="exampleEmail">Email</label>
-                                    <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
-                                     placeholder="Email"
-                                     validators={{required,isemail}}/>
-                                     <Errors
-                                     model='.email'
-                                     show="touched"
-                                     component={(props)=><Formerror props={props}/>}
-                                     messages={{
-                                         required:'\nEmail is required !!',
-                                         isemail:'\nEnter a valid email !!'
-                                     }}
-                                     ></Errors>
+                                        <label htmlFor="username">Username</label>
+                                        <input
+                                            type="username"
+                                            name="username"
+                                            className="form-control"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.username}
+                                        />
                                 </div>
+                                {errors.username && touched.username && <Formerror>{errors.username}</Formerror>}
+                                <div className="form-group">
+                                        <label htmlFor="email">Email</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            className="form-control"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.email}
+                                        />
+                                </div>
+                                {errors.email && touched.email && <Formerror>{errors.email}</Formerror>}
                                 <div className="row">
                                     <div className="col-12 col-sm-6">
                                         <div className="form-group">
-                                            <label htmlFor="examplePassword">Password</label>
-                                            <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
-                                            placeholder="password"
-                                            validators={{required,minLength:minLength(6),maxLength:maxLength(20)}}/>
-                                            <Errors
-                                            model='.password'
-                                            show="touched"
-                                            component={(props)=><Formerror props={props}/>}
-                                            messages={{
-                                                required:'\npassword is required !!',
-                                                minLength:'\npassword should has minimum 6 characters !!',
-                                                maxLength:'\npassword should has maximum 20 characters only !!'
-                                            }}
-                                            ></Errors>
+                                            <label htmlFor="password">Password</label>
+                                            <input
+                                                type="password"
+                                                name="password"
+                                                className="form-control"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.password}
+                                            />
                                         </div>
+                                        {errors.password && touched.password && <Formerror>{errors.password}</Formerror>}
                                     </div>
                                     <div className="col-12 col-sm-6">
                                         <div className="form-group">
-                                            <label htmlFor="cpass">Confirm Password</label>
-                                            <Control.password model=".cpass" className='form-control' name="cpass" id="cpass"
-                                            placeholder="Confirm password"
-                                            validators={{
-                                                required
-                                            }}/>
-                                            <Errors
-                                            model='.cpass'
-                                            show="touched"
-                                            component={(props)=><Formerror props={props}/>}
-                                            messages={{
-                                                required:'\nConfirm password is required !!'
-                                            }}
-                                            ></Errors>
+                                            <label htmlFor="cpassword">Confirm Password</label>
+                                            <input
+                                                type="cpassword"
+                                                name="cpassword"
+                                                className="form-control"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.cpassword}
+                                            />
                                         </div>
+                                        {errors.cpassword && touched.cpassword && <Formerror>{errors.cpassword}</Formerror>}
                                     </div>
                                 </div>
-                                <Link to="/user/signup" className="nav-link">
-                                    <p style={{color:'white'}}>
-                                        <b>
-                                        Are you a user ?
-                                        </b>
-                                    </p>
-                                </Link>
-                                <div className="d-flex justify-content-center mt-2">
-                                    <button className="btn btn-secondary">Sign Up</button>
+                                <div>
+                                    <Link to="/user/signup" className="nav-link">
+                                        <p style={{color:'white'}}>
+                                            <b>
+                                            Are you a user ?
+                                            </b>
+                                        </p>
+                                    </Link>
+                                    <div className="d-flex justify-content-center mt-2">
+                                        <button type="submit" className="btn btn-secondary">Sign Up</button>
+                                    </div>
                                 </div>
-                            </LocalForm>
-                        </div>
+                            </form>
+                        )}
+                        </Formik>
                     </div>
                 </div>
-                    <hr></hr>
+                <hr></hr>
                 </div>
             </div>
         );

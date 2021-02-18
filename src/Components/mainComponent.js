@@ -10,7 +10,6 @@ import {AuthProvider} from '../Context/userauth'
 import { LawyerAuthProvider } from "../Context/lawyerauth"
 import '../index.scss';
 // const indexCss = lazyWithPreload(() => import('../index.scss'))
-// const Footer = lazyWithPreload(() => import('./Partials/Footer/footerComponent')) ;
 
 const Lawyerlogin = lazyWithPreload(() => import('./Lawyer/Login/lawerloginComponent'))
 const Userlogin = lazyWithPreload(() => import('./User/Login/userloginComponent'))
@@ -56,8 +55,6 @@ function Lazysuspense(component){
     return(
         <Suspense fallback={
             <div style={{height:'90vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
-                    {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
-                    </div> */}
                     <div  style={{minWidth:'300px'}}> 
                     <div className="lzy_img__image loading"></div> 
                     <div className="lzy_img__title loading"></div> 
@@ -182,7 +179,6 @@ class Main extends Component{
                         </Switch>
                 }
                 </div>
-                {/* {Lazysuspense(<Footer/>)} */}
                 <Footer></Footer>
                 </LawyerAuthProvider>
             </AuthProvider>

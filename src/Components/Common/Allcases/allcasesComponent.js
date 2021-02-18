@@ -73,8 +73,6 @@ function Allcases(props){
             (props.allcases.isloading)
             ?
             <div style={{height:'90vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
-                    {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
-                    </div> */}
                     <div  style={{minWidth:'300px'}}> 
                     <div className="lzy_img__image loading"></div> 
                     <div className="lzy_img__title loading"></div> 
@@ -85,10 +83,6 @@ function Allcases(props){
             (props.allcases.allcases && props.allcases.allcases.length!==0)
             ?
             <div className="container cases" style={{marginTop:50,marginBottom:50,height:'100%'}}>
-                {/* <Helmet>
-                    <title>ALLCASES | PEPLAW</title>
-                <meta name="description" content="Here you can see every registered cases"/>
-                </Helmet> */}
                 {( true && (document.title='ALLCASES | PEPLAW'))?null:null}
                     <Head data={props.allcases.allcases}/>
                     <div style={{marginTop:50}} className="row justify-content-lg-around">

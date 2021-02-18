@@ -1,13 +1,13 @@
-import React,{useState} from 'react';
-import {Control,LocalForm,Errors} from 'react-redux-form';
+import React from 'react';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 import {successMessage,errorMessage,clearMessage,load,clearLoading,createuser,fetchprofiledata,fetchusercases} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
 import { useAuth } from "../../../Context/userauth"
+import { Formik } from 'formik';
+
 import './googlebtn.scss';
 import './userlogin.scss';
-// import {Helmet} from 'react-helmet'
 const mapStateToProps=state=>{
     return {
     }
@@ -23,11 +23,8 @@ const mapDispatchToProps=dispatch=>({
     fetchprofiledata:(token,type)=>dispatch(fetchprofiledata(token,type)),
     fetchusercases:(token,type)=>dispatch(fetchusercases(token,type)),
 })
-const required=(val)=>(val)&&(val.length)
-// const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 function Userlogin(props){
     let history = useHistory()
-    let [email,setemail] = useState(null)
     const { login,signInWithGoogle,signInWithFacebook,resetPassword } = useAuth()
     const handlesubmit=async(values)=>{
         props.load()
@@ -43,9 +40,6 @@ function Userlogin(props){
             setTimeout(()=>{props.clearMessage()},4000)
             props.clearLoading()
         }
-    }
-    const handlechange=async(values)=>{
-        setemail(values.email)
     }
     const signInGoogle = async()=>{
         props.load()
@@ -85,7 +79,7 @@ function Userlogin(props){
             setTimeout(()=>{props.clearMessage()},4000)
         }
     }
-    const resetPass=async()=>{
+    const resetPass=async(email)=>{
         if(!email){
             props.errorMessage('Please enter the email to send reset link to mail')
             setTimeout(()=>{props.clearMessage()},4000)
@@ -104,10 +98,6 @@ function Userlogin(props){
     }
         return(
             <div className="login">
-                {/* <Helmet>
-                    <title>USER LOGIN | PEPLAW</title>
-                    <meta name="description" content="user login page" />
-                </Helmet> */}
                 {true && (document.title='USER LOGIN | PEPLAW')?null:null}
                 <h5 className="text-center">
                     <svg style={{marginRight:10}} width="22" height="22" fill="currentColor" className="bi bi-person" viewBox="0 0 16 16">
@@ -118,41 +108,53 @@ function Userlogin(props){
                 <hr></hr>
                         <div className="d-flex justify-content-center align-items-center">
                             <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
-                                <div>
-                                    <LocalForm onSubmit={(values)=>handlesubmit(values)}  
-                                    onChange={(values) => handlechange(values)}>
-                                            <div className="form-group">
-                                                <label htmlFor="exampleEmail">Email</label>
-                                                <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
-                                                placeholder="Email"
-                                                validators={{
-                                                    required
-                                                }}/>
-                                                <Errors
-                                                model='.email'
-                                                show="touched"
-                                                component={(props)=><Formerror props={props}/>}
-                                                messages={{
-                                                    required:'\nEmail is required !!',
-                                                }}
-                                                ></Errors>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="examplePassword">Password</label>
-                                                <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
-                                                placeholder="password"
-                                                validators={{
-                                                    required
-                                                }}/>
-                                                <Errors
-                                                model='.password'
-                                                show="touched"
-                                                component={(props)=><Formerror props={props}/>}
-                                                messages={{
-                                                    required:'password is required !!',
-                                                }}
-                                                ></Errors>
-                                            </div>
+
+
+                                <Formik
+                                initialValues={{ email: '', password: '' }}
+                                validate={values => {
+                                    const errors = {};
+                                    if (!values.email) {
+                                    errors.email = 'Email is Required';
+                                    } else if (
+                                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                                    ) {
+                                    errors.email = 'Invalid email address';
+                                    }
+                                    return errors;
+                                }}
+                                onSubmit={(values, { setSubmitting }) => {
+                                    handlesubmit(values)
+                                    setSubmitting(false);
+                                }}
+                                >
+                                {({values,errors,touched,handleChange,handleBlur,handleSubmit,isSubmitting}) => (
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="form-group">
+                                                <label htmlFor="email">Email</label>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    className="form-control"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.email}
+                                                />
+                                        </div>
+                                        {errors.email && touched.email && <Formerror>{errors.email}</Formerror>}
+                                        <div className="form-group">
+                                                <label htmlFor="password">Password</label>
+                                                <input
+                                                    type="password"
+                                                    name="password"
+                                                    className="form-control"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.password}
+                                                />
+                                        </div>
+                                        {errors.password && touched.password && <Formerror>{errors.password}</Formerror>}
+
                                         <div className="d-flex justify-content-between">
                                             <div>
                                                 <Link to="/lawyer/login" className="nav-link">
@@ -164,7 +166,7 @@ function Userlogin(props){
                                                 </Link>
                                             </div>
                                             <div>
-                                                <div onClick={resetPass} className="nav-link text-right">
+                                                <div onClick={()=>resetPass(values.email)} className="nav-link text-right">
                                                     <p style={{color:'white'}}>
                                                         <b className="foot-link">
                                                         Forgot password ?
@@ -174,41 +176,46 @@ function Userlogin(props){
                                             </div>
                                         </div>
                                         <div className="d-flex justify-content-center mt-2">
-                                            <button className="btn btn-secondary">Sign in</button>
+                                        <button type="submit" className="btn btn-secondary">Sign in</button>
                                         </div>
+                                    </form>
+                                )}
+                                </Formik>
 
-                                        <hr className="bg-light"/>
-                                        <div className="container d-flex justify-content-center align-items-center">
-                                            <div className="google-btn" onClick={signInGoogle}>
-                                            <div className="google-icon-wrapper">
-                                                <img className="google-icon" alt="google logo"
-                                                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-                                            </div>
-                                            <span className="btn-text"><b>Sign in with google</b></span>
-                                            </div>
+
+                                <div>
+                                    <hr className="bg-light"/>
+                                    <div className="container d-flex justify-content-center align-items-center">
+                                        <div className="google-btn" onClick={signInGoogle}>
+                                        <div className="google-icon-wrapper">
+                                            <img className="google-icon" alt="google logo"
+                                            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
                                         </div>
-                                        <div className="container d-flex justify-content-center align-items-center mt-2">
-                                            <div onClick={signInFb} className="fb connect">
-                                                <span className="btn-text">
-                                                    <b>
-                                                        Sign in with Facebook
-                                                    </b>
-                                                </span>
-                                            </div>
+                                        <span className="btn-text"><b>Sign in with google</b></span>
                                         </div>
-                                        <div  style={{display:'flex',justifyContent:'center'}}>
-                                            <Link to="/user/signup" className="nav-link">
-                                            <button className="btn btn-warning text-white btn-text font-weight-bold">
-                                                <svg style={{marginRight:10}}
-                                                width="16" height="16" fill="currentColor" className="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                                <path fillRule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                                                </svg>
-                                                Click here to Signup</button>
-                                            </Link>
+                                    </div>
+                                    <div className="container d-flex justify-content-center align-items-center mt-2">
+                                        <div onClick={signInFb} className="fb connect">
+                                            <span className="btn-text">
+                                                <b>
+                                                    Sign in with Facebook
+                                                </b>
+                                            </span>
                                         </div>
-                                    </LocalForm>        
+                                    </div>
+                                    <div  style={{display:'flex',justifyContent:'center'}}>
+                                        <Link to="/user/signup" className="nav-link">
+                                        <button className="btn btn-warning text-white btn-text font-weight-bold">
+                                            <svg style={{marginRight:10}}
+                                            width="16" height="16" fill="currentColor" className="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            <path fillRule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                                            </svg>
+                                            Click here to Signup</button>
+                                        </Link>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     <hr></hr>
