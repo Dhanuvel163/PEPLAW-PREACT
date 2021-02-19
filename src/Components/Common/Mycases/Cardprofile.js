@@ -97,6 +97,7 @@ export default function Cardprofile(props){
                                 <div className="text-center">No Requests Yet !</div>:
                                 props.casedata.lawyerRequests.map((lawyer,index)=>
                                     <RequestCardLawyerDetail key={index} id={props.casedata._id} 
+                                    accepted={(props.casedata.locked===true) ? lawyer._id === props.casedata.lockedlawyer[0]._id : false}
                                     lawyer={lawyer} locked={props.casedata.locked} postacceptbyuser={props.postacceptbyuser}
                                     />
                                 )
@@ -149,7 +150,7 @@ function DetailPart(props){
     )
 }
 
-function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
+function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser,accepted}){
     const toggleIn = (e) => {
         e.persist()
         profile.current.style.display = 'block'
@@ -167,18 +168,29 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
         <>
             <div style={{marginTop:20}}>
                 <Link to={`/profile/${lawyer._id}`} style={{color:'white'}}>
-                {lawyer.name.substring(0,10)}                
+                {lawyer.name.substring(0,10)}        
                 </Link>
                 <svg style={{marginLeft:10}} onMouseEnter={(e)=>debounce(toggleIn(e),200)} onMouseLeave={toggleOut}
                 width="20" height="18" fill="currentColor" className="bi bi-info-circle-fill" viewBox="0 0 16 16">
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                 </svg>
-                    
-                <span style={{float:'right'}}>
-                    <button className="btn btn-sm btn-primary" onClick={postaccept} disabled={locked}>
-                    Accept
-                    </button>
-                </span>
+
+                {
+                    accepted ?
+                    <div style={{float:'right'}}>
+                        <svg style={{margin:0,background:'green',borderRadius:4,boxShadow:'inset 0 0 5px #000000'}} 
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-check2-circle" viewBox="0 0 16 16">
+                        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+                        </svg>
+                    </div>
+                    :
+                    <span style={{float:'right'}}>
+                        <button className="btn btn-sm btn-primary" onClick={postaccept} disabled={locked}>
+                        Accept
+                        </button>
+                    </span>                    
+                }
             </div>
             
             <div className="User-view four-box-shadow" ref={profile}>
@@ -188,7 +200,8 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
                 <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                 </svg>     
                 {lawyer.name}
-                </p>                            <p>
+                </p>                            
+                <p>
                 <svg width="20" height="18" fill="currentColor" className="bi bi-mailbox" viewBox="0 0 16 16">
                 <path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3zm0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4zm2.646 1A3.99 3.99 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3H6.646z"/>
                 <path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z"/>

@@ -33,7 +33,7 @@ function UsereditForm(props){
             <Formik
             initialValues={
               {
-                username:props.profiledata.profiledata.name,
+                name:props.profiledata.profiledata.name,
                 mobile:props.profiledata.profiledata.mobile,
                 country:props.profiledata.profiledata.country,
                 city:props.profiledata.profiledata.city,
@@ -52,10 +52,10 @@ function UsereditForm(props){
             }
             validate={values => {
                 const errors = {};
-                if (!values.username) {
-                errors.username = 'Username is Required';
-                } else if (values.username.length<6 || values.username.length>20) {
-                errors.username = 'Username should has minimum 6 characters and maximum 20 characters';
+                if (!values.name) {
+                errors.name = 'Username is Required';
+                } else if (values.name.length<6) {
+                errors.name = 'Username should has minimum 6 characters';
                 }
                 if (!values.mobile) {
                 errors.mobile = 'Phone Number is Required';
@@ -65,6 +65,12 @@ function UsereditForm(props){
                 if (values.pincode && values.pincode.length !== 6) {
                 errors.pincode = 'Pincode should be 6 characters';
                 }    
+                if(currentLawyer && !values.experience){
+                errors.experience = 'Experience is Required';
+                }
+                if(currentLawyer && !values.j_practice_location){
+                errors.j_practice_location = 'Jurisdictions Admitted to Practice is Required';
+                }
                 return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
@@ -81,17 +87,17 @@ function UsereditForm(props){
                 <div className="row mt-1" style={{ marginTop: 50, marginBottom: 20 }}>
                   <div className="col-12 col-sm-6">
                     <div className="form-group">
-                            <label htmlFor="username">Username</label>
+                            <label htmlFor="name">name</label>
                             <input
                                 type="text"
-                                name="username"
+                                name="name"
                                 className="form-control"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.username}
+                                value={values.name}
                             />
                     </div>
-                    {errors.username && touched.username && <Formerror>{errors.username}</Formerror>}
+                    {errors.name && touched.name && <Formerror>{errors.name}</Formerror>}
                     <div className="row">
                         <div className="col-12 col-sm-6">
                           <div className="form-group">
