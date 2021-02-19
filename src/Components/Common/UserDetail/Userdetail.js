@@ -76,6 +76,13 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                             </div>
                         </div>
                         <div className="card-body profile">
+                        <h5>
+                            <b>
+                            PROFILE DETAILS
+                            </b>
+                        </h5>
+                        <hr style={{backgroundColor:'white'}}/>
+
                             <pre>
                             <span>Mail         : </span>   {detailpage.detailpage.email}
                             </pre>
@@ -103,6 +110,86 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                                     </pre>               
                                 </div>
                             </div>
+                        {detailpage.detailpage.practice_areas &&
+                            <>
+                                <h5 style={{marginTop:40} }>
+                                    <b>
+                                    LAWYER DETAILS
+                                    </b>
+                                </h5>
+                                <hr style={{backgroundColor:'white'}}/>
+                            {
+                                detailpage.detailpage.experience &&
+                                <pre>
+                                <span>Experience         : </span>   {detailpage.detailpage.experience}
+                                </pre>  
+                            }
+                            {
+                                detailpage.detailpage.j_practice_location &&
+                                <pre>
+                                <span>Jurisdictions Admitted to Practice         : </span>   {detailpage.detailpage.j_practice_location}
+                                </pre>                                
+                            }
+                            {
+                                detailpage.detailpage.practice_areas.length > 0 &&
+                                <div>
+                                    <pre><span>Practice Areas</span></pre>
+                                    <ul>
+                                        {
+                                            detailpage.detailpage.practice_areas.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                detailpage.detailpage.languages.length > 0 &&
+                                <div>
+                                    <pre><span>Languages</span></pre>
+                                    <ul>
+                                        {
+                                            detailpage.detailpage.languages.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                detailpage.detailpage.education.length > 0 &&
+                                <div>
+                                    <pre><span>Education</span></pre>
+                                    <ul>
+                                        {
+                                            detailpage.detailpage.education.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                detailpage.detailpage.p_associations.length > 0 &&
+                                <div>
+                                    <pre><span>Associations</span></pre>
+                                    <ul>
+                                        {
+                                            detailpage.detailpage.p_associations.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                detailpage.detailpage.summary &&
+                                <div>
+                                    <h5 style={{marginTop:40} }>
+                                        <b>
+                                        SUMMARY
+                                        </b>
+                                    </h5>
+                                    <hr style={{backgroundColor:'white'}}/>
+                                    <pre>{detailpage.detailpage.summary}</pre>                               
+                                </div>
+                            }
+                            </>
+                        }
+
+
                         </div>
                     </div>
                 </div>

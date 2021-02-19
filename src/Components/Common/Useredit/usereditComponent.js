@@ -13,8 +13,7 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=dispatch=>({
     fetchprofiledata:(token,type)=>dispatch(fetchprofiledata(token,type)),
-    postprofiledata:(name,email,country,city,addr1,state,postalCode,token,type)=>
-    dispatch(postprofiledata(name,email,country,city,addr1,state,postalCode,token,type)),
+    postprofiledata:(values,token,type)=>dispatch(postprofiledata(values,token,type)),
 })
 let fetchedProfiledata = false
 function Useredit(props){
@@ -94,7 +93,8 @@ function Useredit(props){
                 </svg>
                 Your Profile !
               </h4>
-              <div className="d-flex align-center justify-content-center cases Usereditcard" style={{ marginTop: 50 }} >
+              {/* <div className="d-flex align-center justify-content-center cases Usereditcard" style={{ marginTop: 50 }} > */}
+              <div className="container" style={{ marginTop: 50 }} >
                 <Usereditcard profiledata={props.profiledata} clickEdit={clickEdit}></Usereditcard>
               </div>
             </>

@@ -17,8 +17,7 @@ function UsereditForm(props){
             token =await currentLawyer.getIdToken()
             type = 'LAWYER'
         }
-        props.postprofiledata(values.username,values.mobile,values.country,values.city,values.address,
-          values.state,values.pincode,token,type);
+        props.postprofiledata(values,token,type);
         props.clearEdit()
     }
     return(
@@ -41,13 +40,14 @@ function UsereditForm(props){
                 address:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.addr1 : '',
                 pincode:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.postalCode : '',
                 state:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.state : '',
-                experience:'',
-                j_practice_location:'',
-                biography:'',
-                practice_areas:[''],
-                languages:[''],
-                education:[''],
-                p_associations:['']
+
+                experience:props.profiledata.profiledata.experience,
+                j_practice_location:props.profiledata.profiledata.j_practice_location,
+                biography:props.profiledata.profiledata.biography,
+                practice_areas:props.profiledata.profiledata.practice_areas,
+                languages:props.profiledata.profiledata.languages,
+                education:props.profiledata.profiledata.education,
+                p_associations:props.profiledata.profiledata.p_associations
               }
             }
             validate={values => {

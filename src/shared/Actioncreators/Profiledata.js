@@ -57,12 +57,12 @@ export const addprofileloading=()=>({
 
 //post edited profile data
 
-export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode,token,type)=>(dispatch)=>{
+export const postprofiledata=(values,token,type)=>(dispatch)=>{
     dispatch(addprofileloading(true))
     if(type==="LAWYER"){
         return fetch(baseUrl+'api/lawyeraccounts/profile',{
             method: "POST",
-            body:JSON.stringify({name,mobile,country,city,addr1,state,postalCode}),
+            body:JSON.stringify(values),
             credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode,to
     }else if(type==="USER"){
         return fetch(baseUrl+'api/useraccounts/profile',{
             method: "POST",
-            body:JSON.stringify({name,mobile,country,city,addr1,state,postalCode}),
+            body:JSON.stringify(values),
             credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",

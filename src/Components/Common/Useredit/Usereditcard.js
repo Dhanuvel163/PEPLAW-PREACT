@@ -16,11 +16,17 @@ export default function Usereditcard(props) {
           </div>
         </div>
         <div className="card-body profile">
+            <h5>
+                <b>
+                PROFILE DETAILS
+                </b>
+            </h5>
+            <hr style={{backgroundColor:'white'}}/>
             <div className="mb-3">
-            <img  src={props.profiledata.profiledata.picture} className="profile-img" alt={props.profiledata.profiledata.name}/>
-            <span style={{marginLeft:'15px'}}>
-              {props.profiledata.profiledata.name}
-            </span>
+              <img  src={props.profiledata.profiledata.picture} className="profile-img" alt={props.profiledata.profiledata.name}/>
+              <span style={{marginLeft:'15px'}}>
+                {props.profiledata.profiledata.name}
+              </span>
             </div>
             <pre>
             <span>Mail         : </span>   {props.profiledata.profiledata.email}
@@ -49,6 +55,90 @@ export default function Usereditcard(props) {
                     </pre>               
                 </div>
             </div>
+
+
+                        {props.profiledata.profiledata.practice_areas &&
+                            <>
+                                <h5 style={{marginTop:40} }>
+                                    <b>
+                                    LAWYER DETAILS
+                                    </b>
+                                </h5>
+                                <hr style={{backgroundColor:'white'}}/>
+                            {
+                                props.profiledata.profiledata.experience &&
+                                <pre>
+                                <span>Experience         : </span>   {props.profiledata.profiledata.experience}
+                                </pre>  
+                            }
+                            {
+                                props.profiledata.profiledata.j_practice_location &&
+                                <pre>
+                                <span>Jurisdictions Admitted to Practice         : </span>   {props.profiledata.profiledata.j_practice_location}
+                                </pre>                                
+                            }
+                            {
+                                props.profiledata.profiledata.practice_areas.length > 0 &&
+                                <div>
+                                    <pre><span>Practice Areas</span></pre>
+                                    <ul>
+                                        {
+                                            props.profiledata.profiledata.practice_areas.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                props.profiledata.profiledata.languages.length > 0 &&
+                                <div>
+                                    <pre><span>Languages</span></pre>
+                                    <ul>
+                                        {
+                                            props.profiledata.profiledata.languages.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                props.profiledata.profiledata.education.length > 0 &&
+                                <div>
+                                    <pre><span>Education</span></pre>
+                                    <ul>
+                                        {
+                                            props.profiledata.profiledata.education.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                props.profiledata.profiledata.p_associations.length > 0 &&
+                                <div>
+                                    <pre><span>Associations</span></pre>
+                                    <ul>
+                                        {
+                                            props.profiledata.profiledata.p_associations.map((d,i)=>(<li key={i}>{d}</li>))
+                                        }
+                                    </ul>
+                                </div>                                
+                            }
+                            {
+                                props.profiledata.profiledata.summary &&
+                                <div>
+                                    <h5 style={{marginTop:40} }>
+                                        <b>
+                                        SUMMARY
+                                        </b>
+                                    </h5>
+                                    <hr style={{backgroundColor:'white'}}/>
+                                    <pre>{props.profiledata.profiledata.summary}</pre>                               
+                                </div>
+                            }
+                            </>
+                        }
+
+
+
+
         </div>
       </div>
      }
