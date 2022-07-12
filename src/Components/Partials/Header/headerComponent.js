@@ -140,7 +140,7 @@ function Header (props){
 
     return(
             <div className="fixed-top header-footer four-box-shadow-real">
-                <div className="navbar navbar-expand-md navbar-dark bg-dark">
+                <div className="navbar navbar-expand-md navbar-dark Hglass">
                     <div className="navbar-brand">
                         <Link to="/" style={{color:'white'}} className="nav-link">
                         <img src="/assets/lawlogo192.jpg" alt="logo'" height="30" style={{marginRight:10,borderRadius:'50%'}}/>

@@ -1,9 +1,3 @@
-.navbar {
-  opacity: 0.9;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  border-radius: 15px 15px 0 0;
-}
 .navbar-collapse {
   transition: 1s !important;
 }
@@ -13,7 +7,6 @@
 }
 .dropdown-menu {
   background-color: whitesmoke !important;
-  // background-color: inherit !important;
   border: 1.5px solid white !important;
   box-shadow: inset 0 0 7px #000000;
   padding: 0px !important;
@@ -63,13 +56,13 @@
 
 .progress-container {
   width: 100%;
-  height: 6px;
+  height: 2px;
   background: #ccc;
   border-radius: 0 0 15px 15px;
 }
 
 .progress-bar {
-  height: 6px;
+  height: 2px;
   background: blueviolet;
   width: 0%;
   border-radius: 0 0 15px 15px;

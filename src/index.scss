@@ -55,8 +55,8 @@
 .glass {
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  // backdrop-filter: blur(10px);
-  // -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   // border-radius: 10px;
 
   // background: rgba(136, 25, 234, 0.3);
@@ -67,6 +67,21 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.Hglass {
+  // box-shadow: 0 8px 32px 0 rgba(19, 20, 36, 0.726);
+  backdrop-filter: saturate(180%) blur(5px);
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  // background: rgba(136, 25, 234, 0.3);
+  // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  // backdrop-filter: blur(3.5px);
+  // -webkit-backdrop-filter: blur(3.5px);
+  // border-radius: 10px;
+  // border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 // /*! purgecss start ignore */
 
 *,
@@ -75,17 +90,8 @@ html {
 }
 
 // //For BG
-
-.bg-dark {
-  // background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
-
-  // background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  &:hover {
-    opacity: 1;
-    // background: rgba(36, 11, 54, 0.9);
-    background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));
-  }
+.bg-black {
+  background: black !important;
 }
 .bg-danger {
   background: linear-gradient(to right, rgb(127, 0, 255), rgb(102, 18, 158));
@@ -124,15 +130,10 @@ html {
 // //For Header-Footer
 
 .header-footer {
-  margin: 5px 10px 0px 10px;
-  border-radius: 15px;
+  // margin: 5px 10px 0px 10px;
+  // border-radius: 15px;
 }
 @media only screen and (max-width: 600px) {
-  .header-footer {
-    // margin: 2px 2px 3px 2px;
-    margin: 0px 0px 0px 0px !important;
-    border-radius: 0px;
-  }
   .navbar-brand > a {
     padding: 2px;
   }
@@ -156,10 +157,6 @@ html {
   overflow: hidden;
   position: initial;
 }
-// .cases .card-body {
-//   background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
-//   border-radius: inherit;
-// }
 
 .cases .card-header {
   box-shadow: 0 8px 6px -6px black;
@@ -190,7 +187,6 @@ form {
   border-radius: 10px !important;
   background-color: inherit !important;
   color: whitesmoke !important;
-  /* border: 2.1px solid blueviolet !important; */
   border: 2.1px solid #6c63ff !important;
   opacity: 0.8;
   transition: transform 0.3s ease-in-out !important;
@@ -226,14 +222,6 @@ form {
   display: none;
 }
 
-// @keyframes growDown {
-//   0% {
-//     transform: scaleY(0);
-//   }
-//   100% {
-//     transform: scaleY(1);
-//   }
-// }
 @keyframes fadein {
   from {
     opacity: 0;
@@ -242,8 +230,6 @@ form {
     opacity: 1;
   }
 }
-
-// //Scrollbar
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -297,28 +283,6 @@ form {
   border-radius: 10px;
   animation: loadingfade 0.8s infinite;
 }
-// // .loading::after {
-// //   display: block;
-// //   content: "";
-// //   position: absolute;
-// //   width: 80%;
-// //   height: 100%;
-// //   transform: translateX(0%);
-
-// //   background: linear-gradient(
-// //     90deg,
-// //     transparent,
-// //     rgba(148, 110, 110, 0.2),
-// //     transparent
-// //   );
-// //   animation: loading 1s infinite;
-// // }
-
-// // @keyframes loading {
-// //   100% {
-// //     transform: translateX(40%);
-// //   }
-// // }
 @keyframes loadingfade {
   0% {
     opacity: 1;
@@ -327,4 +291,3 @@ form {
     opacity: 0.7;
   }
 }
-// /*! purgecss end ignore */
