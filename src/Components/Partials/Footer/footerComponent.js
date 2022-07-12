@@ -15,7 +15,7 @@ function Footer(){
     })
 
         return(
-            <div className='bg-black header-footer four-box-shadow-real footer'>
+            <div className='Hglass header-footer four-box-shadow-real footer'>
                 <div className="d-flex justify-content-between foot">
 
                     <div className="d-flex justify-content-center align-items-center frame f-contact">
