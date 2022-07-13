@@ -69,7 +69,7 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                         {true && (document.title=`${detailpage.detailpage.name.toUpperCase()} | PEPLAW`)?null:null}
                         <div className="card-header">
                             <div className="mb-3">
-                            <img  src={detailpage.detailpage.picture} className="profile-img" alt={detailpage.detailpage.name}/>
+                            <img  src={'https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg' || detailpage.detailpage.picture} className="profile-img" alt={detailpage.detailpage.name}/>
                             <span style={{marginLeft:'15px'}}>
                             {detailpage.detailpage.name}
                             </span>
@@ -83,30 +83,30 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                         </h5>
                         <hr style={{backgroundColor:'white'}}/>
 
-                            <pre>
-                            <span>Mail         : </span>   {detailpage.detailpage.email}
-                            </pre>
-                            <pre>
-                            <span>Mobile     : </span>   {detailpage.detailpage.mobile || 'No Data !'}
-                            </pre>
-                            <pre>
-                            <span>Address  : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.addr1 : 'No Data !'}
-                            </pre>
+                            <p>
+                            <span className="titleValue">Mail</span>:   {detailpage.detailpage.email}
+                            </p>
+                            <p>
+                            <span className="titleValue">Mobile</span>:   {detailpage.detailpage.mobile || 'No Data !'}
+                            </p>
+                            <p>
+                            <span className="titleValue">Address</span>:   {detailpage.detailpage.address ? detailpage.detailpage.address.addr1 : 'No Data !'}
+                            </p>
                             <div className="row">
                                 <div className="col-12 col-md-6">
-                                    <pre>
-                                    <span>State       : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.state ? detailpage.detailpage.address.state : 'No Data !' : 'No Data !'}
-                                    </pre>
-                                    <pre>
-                                    <span>Country : </span>   {detailpage.detailpage.country || 'No Data !'}
-                                    </pre>
+                                    <p>
+                                    <span className="titleValue">State</span>:   {detailpage.detailpage.address ? detailpage.detailpage.address.state ? detailpage.detailpage.address.state : 'No Data !' : 'No Data !'}
+                                    </p>
+                                    <p>
+                                    <span className="titleValue">Country</span>:   {detailpage.detailpage.country || 'No Data !'}
+                                    </p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <pre>
-                                    <span>Pincode  : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.postalCode ? detailpage.detailpage.address.postalCode : 'No Data !': 'No Data !'}
+                                    <span className="titleValue">Pincode</span>:   {detailpage.detailpage.address ? detailpage.detailpage.address.postalCode ? detailpage.detailpage.address.postalCode : 'No Data !': 'No Data !'}
                                     </pre> 
                                     <pre>
-                                    <span>City         : </span>   {detailpage.detailpage.city || 'No Data !'}
+                                    <span className="titleValue">City</span>:   {detailpage.detailpage.city || 'No Data !'}
                                     </pre>               
                                 </div>
                             </div>
@@ -120,15 +120,15 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                                 <hr style={{backgroundColor:'white'}}/>
                             {
                                 detailpage.detailpage.experience &&
-                                <pre>
-                                <span>Experience         : </span>   {detailpage.detailpage.experience}
-                                </pre>  
+                                <p>
+                                <span className="titleValue">Experience</span>:   {detailpage.detailpage.experience}
+                                </p>  
                             }
                             {
                                 detailpage.detailpage.j_practice_location &&
-                                <pre>
-                                <span>Jurisdictions Admitted to Practice         : </span>   {detailpage.detailpage.j_practice_location}
-                                </pre>                                
+                                <p>
+                                <span className="titleValue" style={{width:'auto'}}>Jurisdictions Admitted to Practice</span> :   {detailpage.detailpage.j_practice_location}
+                                </p>                                
                             }
                             {
                                 detailpage.detailpage.practice_areas.length > 0 &&

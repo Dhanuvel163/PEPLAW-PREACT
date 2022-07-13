@@ -23,36 +23,36 @@ export default function Usereditcard(props) {
             </h5>
             <hr style={{backgroundColor:'white'}}/>
             <div className="mb-3">
-              <img  src={props.profiledata.profiledata.picture} className="profile-img" alt={props.profiledata.profiledata.name}/>
+              <img  src={'https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg' || props.profiledata.profiledata.picture} className="profile-img" alt={props.profiledata.profiledata.name}/>
               <span style={{marginLeft:'15px'}}>
                 {props.profiledata.profiledata.name}
               </span>
             </div>
-            <pre>
-            <span>Mail         : </span>   {props.profiledata.profiledata.email}
-            </pre>
-            <pre>
-            <span>Mobile     : </span>   {props.profiledata.profiledata.mobile || 'No Data !'}
-            </pre>
-            <pre>
-            <span>Address  : </span>   {props.profiledata.profiledata.address ? props.profiledata.profiledata.address.addr1 : 'No Data !'}
-            </pre>
+            <p>
+            <span className="titleValue">Mail</span>: {props.profiledata.profiledata.email}
+            </p>
+            <p>
+            <span className="titleValue">Mobile</span>: {props.profiledata.profiledata.mobile || 'No Data !'}
+            </p>
+            <p>
+            <span className="titleValue">Address</span>: {props.profiledata.profiledata.address ? props.profiledata.profiledata.address.addr1 : 'No Data !'}
+            </p>
             <div className="row">
                 <div className="col-12 col-md-6">
-                    <pre>
-                    <span>State       : </span>   {props.profiledata.profiledata.address ? props.profiledata.profiledata.address.state ? props.profiledata.profiledata.address.state : 'No Data !' : 'No Data !'}
-                    </pre>
-                    <pre>
-                    <span>Country : </span>   {props.profiledata.profiledata.country || 'No Data !'}
-                    </pre>
+                    <p>
+                    <span className="titleValue">State</span>: {props.profiledata.profiledata.address ? props.profiledata.profiledata.address.state ? props.profiledata.profiledata.address.state : 'No Data !' : 'No Data !'}
+                    </p>
+                    <p>
+                    <span className="titleValue">Country</span>: {props.profiledata.profiledata.country || 'No Data !'}
+                    </p>
                 </div>
                 <div className="col-12 col-md-6">
-                    <pre>
-                    <span>Pincode  : </span>   {props.profiledata.profiledata.address ? props.profiledata.profiledata.address.postalCode ? props.profiledata.profiledata.address.postalCode : 'No Data !': 'No Data !'}
-                    </pre> 
-                    <pre>
-                    <span>City         : </span>   {props.profiledata.profiledata.city || 'No Data !'}
-                    </pre>               
+                    <p>
+                    <span className="titleValue">Pincode</span>: {props.profiledata.profiledata.address ? props.profiledata.profiledata.address.postalCode ? props.profiledata.profiledata.address.postalCode : 'No Data !': 'No Data !'}
+                    </p> 
+                    <p>
+                    <span className="titleValue">City</span>: {props.profiledata.profiledata.city || 'No Data !'}
+                    </p>               
                 </div>
             </div>
 
@@ -67,15 +67,15 @@ export default function Usereditcard(props) {
                                 <hr style={{backgroundColor:'white'}}/>
                             {
                                 props.profiledata.profiledata.experience &&
-                                <pre>
-                                <span>Experience         : </span>   {props.profiledata.profiledata.experience}
-                                </pre>  
+                                <p>
+                                <span className="titleValue">Experience</span>: {props.profiledata.profiledata.experience}
+                                </p>  
                             }
                             {
                                 props.profiledata.profiledata.j_practice_location &&
-                                <pre>
-                                <span>Jurisdictions Admitted to Practice         : </span>   {props.profiledata.profiledata.j_practice_location}
-                                </pre>                                
+                                <p>
+                                <span className="titleValue" style={{width:'auto'}}>Jurisdictions Admitted to Practice</span> : {props.profiledata.profiledata.j_practice_location}
+                                </p>                                
                             }
                             {
                                 props.profiledata.profiledata.practice_areas.length > 0 &&
