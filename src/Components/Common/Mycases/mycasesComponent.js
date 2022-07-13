@@ -112,7 +112,7 @@ function Mycases(props){
                             {
                                 props.usercases.usercasedata.cases.map((data)=>{
                                     return(
-                                    <div key={data.dispositioncode}  className="">
+                                    <div key={data.dispositioncode}  className="position-relative">
                                         <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                     </div>
                                     );
@@ -126,7 +126,7 @@ function Mycases(props){
                             {
                                 props.usercases.usercasedata.pendingcases.map((data)=>{
                                     return(
-                                    <div key={data.dispositioncode}>
+                                    <div key={data.dispositioncode} className="position-relative">
                                         <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                     </div>
                                     );
@@ -140,7 +140,7 @@ function Mycases(props){
                             {
                                 props.usercases.usercasedata.acceptedcases.map((data)=>{
                                     return(
-                                    <div key={data.dispositioncode}  className="">
+                                    <div key={data.dispositioncode}  className="position-relative">
                                         <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                     </div>
                                     );
@@ -157,7 +157,7 @@ function Mycases(props){
                             {
                                 props.usercases.usercasedata.rejectedcases.map((data)=>{
                                     return(
-                                    <div key={data.dispositioncode}  className="">
+                                    <div key={data.dispositioncode}  className="position-relative">
                                         <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                     </div>
                                     );
