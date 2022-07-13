@@ -78,7 +78,6 @@ function Mycases(props){
         <div className="container cases" style={{marginTop:50,marginBottom:50,height:'100%'}}>
                 {true && (document.title='MYCASES | PEPLAW')?null:null}
             <div>
-
                 <ul className="nav nav-tabs">
                     <div className="nav-item">
                         <div className={activeTab === '1'?"nav-link active":"nav-link"} onClick={() => { toggle('1'); }}> 
@@ -106,72 +105,71 @@ function Mycases(props){
                     ''
                     }
                 </ul>
-
-            <div className="tab-content">
-                <div className={activeTab === '1'?"tab-pane active":"tab-pane"}>
-                    <Head data={props.usercases.usercasedata.cases} title="Your Cases !"/>
-                    <div style={{marginTop:50}} className="row justify-content-lg-around">
-                        {
-                            props.usercases.usercasedata.cases.map((data)=>{
-                                return(
-                                <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
-                                    <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
-                                </div>
-                                );
-                            }) 
-                        }
-                    </div>
-                </div>
-                <div className={activeTab === '2'?"tab-pane active":"tab-pane"}>
-                    <Head data={props.usercases.usercasedata.pendingcases} title="Your Pending Cases !"/>
-                    <div style={{marginTop:50}} className="row justify-content-lg-around">
-                        {
-                            props.usercases.usercasedata.pendingcases.map((data)=>{
-                                return(
-                                <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
-                                    <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
-                                </div>
-                                );
-                            }) 
-                        }
-                    </div>
-                </div>
-                <div className={activeTab === '3'?"tab-pane active":"tab-pane"}>
-                    <Head data={props.usercases.usercasedata.acceptedcases} title="Your Accepted Cases !"/>
-                    <div style={{marginTop:50}} className="row justify-content-lg-around">
-                        {
-                            props.usercases.usercasedata.acceptedcases.map((data)=>{
-                                return(
-                                <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
-                                    <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
-                                </div>
-                                );
-                            }) 
-                        }
-                    </div>
-                </div>
-                <div className={activeTab === '4'?"tab-pane active":"tab-pane"}>
-                    {
-                        (currentLawyer)?
-                        <Fragment>
-                        <Head data={props.usercases.usercasedata.rejectedcases} title="Your Rejected Cases !"/>
+                <div className="tab-content">
+                    <div className={activeTab === '1'?"tab-pane active":"tab-pane"}>
+                        <Head data={props.usercases.usercasedata.cases} title="Your Cases !"/>
                         <div style={{marginTop:50}} className="row justify-content-lg-around">
                             {
-                                props.usercases.usercasedata.rejectedcases.map((data)=>{
+                                props.usercases.usercasedata.cases.map((data)=>{
                                     return(
                                     <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
                                         <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                     </div>
                                     );
-                                }) 
+                                })
                             }
                         </div>
-                        </Fragment>:
-                        <Fragment>
-                        </Fragment>
-                    }
+                    </div>
+                    <div className={activeTab === '2'?"tab-pane active":"tab-pane"}>
+                        <Head data={props.usercases.usercasedata.pendingcases} title="Your Pending Cases !"/>
+                        <div style={{marginTop:50}} className="row justify-content-lg-around">
+                            {
+                                props.usercases.usercasedata.pendingcases.map((data)=>{
+                                    return(
+                                    <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
+                                        <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
+                                    </div>
+                                    );
+                                })
+                            }
+                        </div>
+                    </div>
+                    <div className={activeTab === '3'?"tab-pane active":"tab-pane"}>
+                        <Head data={props.usercases.usercasedata.acceptedcases} title="Your Accepted Cases !"/>
+                        <div style={{marginTop:50}} className="row justify-content-lg-around">
+                            {
+                                props.usercases.usercasedata.acceptedcases.map((data)=>{
+                                    return(
+                                    <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
+                                        <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
+                                    </div>
+                                    );
+                                })
+                            }
+                        </div>
+                    </div>
+                    <div className={activeTab === '4'?"tab-pane active":"tab-pane"}>
+                        {
+                            (currentLawyer)?
+                            <Fragment>
+                            <Head data={props.usercases.usercasedata.rejectedcases} title="Your Rejected Cases !"/>
+                            <div style={{marginTop:50}} className="row justify-content-lg-around">
+                                {
+                                    props.usercases.usercasedata.rejectedcases.map((data)=>{
+                                        return(
+                                        <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
+                                            <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
+                                        </div>
+                                        );
+                                    })
+                                }
+                            </div>
+                            </Fragment>:
+                            <Fragment>
+                            </Fragment>
+                        }
+                    </div>
                 </div>
-            </div>
             </div>
 
         </div>    
