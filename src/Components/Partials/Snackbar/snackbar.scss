@@ -12,9 +12,9 @@
   padding: 11px !important;
 }
 .snack {
-  position: absolute;
-  z-index: 700;
-  top: 10;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
   /* width: 98.5%; */
   width: 100%;
 }
