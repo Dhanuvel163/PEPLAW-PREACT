@@ -52,3 +52,42 @@
 .nav-item > .active {
   box-shadow: inset 0 0 5px #000000 !important;
 }
+
+.parentCase {
+  height: auto;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media only screen and (max-width: 1100px) {
+  .parentCase {
+    height: auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  .parentCase {
+    height: auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .parentCase {
+    height: auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.h-75{
+  height: 75px !important;
+  overflow: hidden;
+}

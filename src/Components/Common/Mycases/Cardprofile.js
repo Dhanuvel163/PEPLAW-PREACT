@@ -24,7 +24,7 @@ export default function Cardprofile(props){
             (currentLawyer)
             ?
             <div className="card bg-danger card-style four-box-shadow" style={{marginTop:50}} >
-                <div className="card-header">
+                <div className="card-header h-75">
                     <div onMouseEnter={toggleIn} onMouseLeave={toggleOut}>
                         <Link to={`/profile/${props.casedata.User[0]._id}`} style={{color:'white'}}>
                         <svg width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -66,7 +66,7 @@ export default function Cardprofile(props){
             (currentUser)
             ?
             <div className="card bg-danger card-style four-box-shadow"style={{marginTop:50}} >
-                <div className="card-header" style={{textTransform:'uppercase'}}>
+                <div className="card-header h-75" style={{textTransform:'uppercase'}}>
                 <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
                  {props.casedata.dispositioncode}
                 </div>
