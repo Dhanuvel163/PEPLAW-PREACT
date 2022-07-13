@@ -21,31 +21,6 @@
 //   border-radius: 10px;
 // }
 
-.User-view {
-  top: 96px;
-  left: 30px;
-  z-index: 99;
-  position: absolute;
-  width: fit-content;
-  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
-  padding: 10px;
-  border-radius: 5px;
-  display: none;
-  animation: growDown 0.2s forwards;
-  box-shadow: 0px 2px 5px 0px #141212;
-}
-.User-view:after {
-  content: "";
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: 24px;
-  top: -24px;
-  border: 9px solid transparent;
-  border-bottom: 15px solid rgb(142, 45, 226);
-  z-index: 3;
-}
-
 .User-view2 {
   // top: 96px;
   // left: 30px;
@@ -71,17 +46,6 @@
   z-index: 3;
 }
 
-
-@keyframes growDown {
-  0% {
-    // transform: scaleY(0);
-    height: 0px;
-  }
-  100% {
-    height: 100px;
-    // transform: scaleY(1);
-  }
-}
 .nav-tabs .nav-link {
   color: white;
   font-weight: bold !important;
@@ -99,40 +63,6 @@
 
 .nav-item > .active {
   box-shadow: inset 0 0 5px #000000 !important;
-}
-
-.parentCase {
-  height: auto;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media only screen and (max-width: 1100px) {
-  .parentCase {
-    height: auto;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media only screen and (max-width: 840px) {
-  .parentCase {
-    height: auto;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media only screen and (max-width: 550px) {
-  .parentCase {
-    height: auto;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(1, 1fr);
-  }
 }
 
 .h-75{

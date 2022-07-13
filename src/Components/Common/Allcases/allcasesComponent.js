@@ -85,12 +85,12 @@ function Allcases(props){
             <div className="container cases" style={{marginTop:50,marginBottom:50,height:'100%'}}>
                 {( true && (document.title='ALLCASES | PEPLAW'))?null:null}
                     <Head data={props.allcases.allcases}/>
-                    <div style={{marginTop:50}} className="row justify-content-lg-around">
+                    <div className="parentCase">
                         {
                             props.allcases.allcases.map((data)=>{
                                 return(
-                                <div className="col-sm-12 col-md-6 col-lg-3" key={data.dispositioncode} >
-                                <Cardprofile postapply={props.postapply} casedata={data} install={props.install}></Cardprofile>
+                                <div className="position-relative" key={data.dispositioncode} >
+                                    <Cardprofile postapply={props.postapply} casedata={data} install={props.install}></Cardprofile>
                                 </div>
                                 )
                             })                        
