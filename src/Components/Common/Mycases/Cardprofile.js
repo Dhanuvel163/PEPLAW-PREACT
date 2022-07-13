@@ -27,13 +27,13 @@ export default function Cardprofile(props){
                 <div className="card-header h-75">
                     <div onMouseEnter={toggleIn} onMouseLeave={toggleOut}>
                         <Link to={`/profile/${props.casedata.User[0]._id}`} style={{color:'white'}}>
-                        <svg width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>            
-                        <span style={{textTransform:'uppercase'}}>
-                        {props.casedata.User[0].name}                        
-                        </span>  
+                            <svg width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>        
+                            <span style={{textTransform:'uppercase'}}>
+                                {props.casedata.User[0].name}                        
+                            </span>
                         </Link>         
                         <div className="User-view four-box-shadow" ref={profile}>
                             <p>
@@ -67,8 +67,10 @@ export default function Cardprofile(props){
             ?
             <div className="card bg-danger card-style four-box-shadow"style={{marginTop:50}} >
                 <div className="card-header h-75" style={{textTransform:'uppercase'}}>
-                <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
-                 {props.casedata.dispositioncode}
+                    {/* <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span> */}
+                    <div>
+                    {props.casedata.dispositioncode}
+                    </div>
                 </div>
                 <div className="card-body mycases">
 
@@ -126,24 +128,34 @@ export default function Cardprofile(props){
 function DetailPart(props){
     return(
         <>
-        <div className="card-text">
-            <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
+        <div className="card-text text-warning font-weight-bold">
+            Disposition Code
+        </div>
+        <div className="m-35">
             {props.casedata.dispositioncode}
         </div>
-        <div className="card-text">
-            <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
+        <div className="card-text text-warning font-weight-bold mt-2">
+            Amended Charge
+        </div>
+        <div className="m-35">
             {props.casedata.amendedcharge}
         </div>
-        <div className="card-text">
-            <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
+        <div className="card-text text-warning font-weight-bold mt-2">
+            Disposition date
+        </div>
+        <div className="m-35">
             {props.casedata.dispositiondate}
         </div>
-        <div className="card-text">
-            <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
+        <div className="card-text text-warning font-weight-bold mt-2">
+            Sentencetime
+        </div>
+        <div className="m-35">
             {props.casedata.sentencetime}
         </div>
-        <div className="card-text">
-            <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
+        <div className="card-text text-warning font-weight-bold mt-2">
+            Description
+        </div>
+        <div className="m-35">
             {props.casedata.description}
         </div>
         </>
@@ -172,16 +184,15 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser,accepted}){
                 </Link>
                 <svg style={{marginLeft:10}} onMouseEnter={(e)=>debounce(toggleIn(e),200)} onMouseLeave={toggleOut}
                 width="20" height="18" fill="currentColor" className="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                 </svg>
-
                 {
                     accepted ?
                     <div style={{float:'right'}}>
                         <svg style={{margin:0,background:'green',borderRadius:4,boxShadow:'inset 0 0 5px #000000'}} 
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-check2-circle" viewBox="0 0 16 16">
-                        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
-                        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+                            <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                            <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
                         </svg>
                     </div>
                     :
@@ -193,27 +204,21 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser,accepted}){
                 }
             </div>
             
-            <div className="User-view four-box-shadow" ref={profile}>
+            <div className="User-view2 four-box-shadow" ref={profile}>
                 <p>
-                <svg  width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                </svg>     
-                {lawyer.name}
+                    <svg  width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>     
+                    {lawyer.name}
                 </p>                            
                 <p>
-                <svg width="20" height="18" fill="currentColor" className="bi bi-mailbox" viewBox="0 0 16 16">
-                <path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3zm0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4zm2.646 1A3.99 3.99 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3H6.646z"/>
-                <path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z"/>
-                </svg>
-                {lawyer.email}
+                    <svg width="20" height="18" fill="currentColor" className="bi bi-mailbox" viewBox="0 0 16 16">
+                        <path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3zm0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4zm2.646 1A3.99 3.99 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3H6.646z"/>
+                        <path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z"/>
+                    </svg>
+                    {lawyer.email}
                 </p>
-                {/* <p>
-                <svg width="20" height="18" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
-                <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                </svg>
-                {lawyer.mobile}
-                </p> */}
             </div>
         </>
     )

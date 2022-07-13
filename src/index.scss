@@ -162,7 +162,7 @@ html {
   box-shadow: 0 8px 6px -6px black;
   border-bottom-left-radius: 5px !important;
   border-bottom-right-radius: 5px !important;
-  z-index: 2;
+  // z-index: 2;
 }
 
 .home-card {
@@ -295,4 +295,8 @@ form {
 .titleValue{
   display: inline-block;
   width: 110px;
+}
+
+.m-35{
+  margin-left: 35px;
 }
